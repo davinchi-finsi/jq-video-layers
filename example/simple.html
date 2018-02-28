@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simple example</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.structure.min.css">
+        <link rel="stylesheet" href="../dist/video-layers.structure.css">
+        <link rel="stylesheet" href="../dist/video-layers.theme-default.css">
+        <link rel="stylesheet" href="./main.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    </head>
+    <body>
+        <div class="main">
+            <video width="400" controls>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+                Your browser does not support HTML5 video.
+            </video>
+            <div>
+                <div id="external-layer-1" class="layer">
+                    First Layer in other container
+                </div>
+                <div id="external-layer-2" class="layer">
+                    Second Layer in other container
+                </div>
+            </div>
+        </div>
+        <div id="layer-img" class="layer">
+            <img src="./image.jpg">
+        </div>
+        <script src="../dist/jquery.video-layers.js"></script>
+        <script>
+            $(function(){
+                $("video").videoLayers({
+                    layers:[
+                        {
+                            content:"Some text for the layer",
+                            position:[25,25],
+                            start:1,
+                            stop:4
+                        },
+                        {
+                            element:"#external-layer-1",
+                            appendToLayers:false,//by default the layers are appended to the layer container
+                            start:1,
+                            stop:4,
+                            show:{effect:"fade",duration:1000},
+                            hide:{effect:"fade",duration:1000}
+                        },
+                        {
+                            element:"#layer-img",
+                            cssClass:"addThisClass andThisOne c-video-layers__layer--strip",
+                            styles:{
+                                width:"50%"
+                            },
+                            position:{
+                                my:"center",
+                                to:"center"
+                            },
+                            start:5,
+                            stop:10,
+                            show:{effect:"fade",duration:1000},
+                            hide:{effect:"blind",duration:500}
+                        },
+                        {
+                            element:"#external-layer-2",
+                            appendToLayers:false,//by default the layers are appended to the layer container
+                            start:5,
+                            stop:10,
+                            show:{effect:"fade",duration:1000},
+                            hide:{effect:"fade",duration:1000}
+                        }
+                    ]
+                }).on(jqVideoLayers.VideoLayersEvents.beforeShowLayer,(e,data)=>{
+                    console.log("beforeShow",data.layer);
+                }).on(jqVideoLayers.VideoLayersEvents.showLayer,(e,data)=> {
+                    console.log("showLayer", data.layer);
+                }).on(jqVideoLayers.VideoLayersEvents.beforeHideLayer,(e,data)=>{
+                    console.log("beforeHideLayer",data.layer);
+                }).on(jqVideoLayers.VideoLayersEvents.hideLayer,(e,data)=> {
+                    console.log("hideLayer", data.layer);
+                })
+            });
+        </script>
+    </body>
+</html>

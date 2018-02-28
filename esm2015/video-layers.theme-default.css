@@ -1,0 +1,6 @@
+.c-video-layers .c-video-layers__layer:not(.c-video-layers__layer--strip) {
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+}

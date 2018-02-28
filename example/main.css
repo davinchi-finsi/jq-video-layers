@@ -1,0 +1,10 @@
+.layer{
+    display: none;
+}
+.main{
+    display: flex;
+    width:60em;
+}
+.main > *{
+    flex-basis: 50%;
+}
