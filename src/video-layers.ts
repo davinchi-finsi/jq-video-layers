@@ -24,7 +24,8 @@ export class VideoLayers{
      */
     protected wrapperEl:JQuery;
     /**
-     * Layers container (appended layers, see [[VideoLayerOptions.appendToLayers]])
+     * Layers container. The layers will be appended to this element by default
+     * @see [[VideoLayerOptions.appendToLayers]]
      */
     protected layersContainer:JQuery;
     protected layers:VideoLayer[];

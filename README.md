@@ -31,7 +31,7 @@ For more info, please check the [docs](https://davinchi-finsi.github.io/jq-video
 ## Playground
 [Demo in jsfiddle](https://jsfiddle.net/Haztivity/bhdemb2a/)
 
-## Plyr videoplayer playground
+## Plyr with fullscreen
 [Demo in jsfiddle](https://jsfiddle.net/Haztivity/69uftqjn/)
 
 ## Usage
@@ -39,7 +39,7 @@ Install with `npm i jq-video-layers`
 or download the [latest release](https://github.com/davinchi-finsi/jq-video-layers/releases)
 
 ### Import as module
-Typescript:
+#### Typescript:
 ```typescript
 import * as $ from "jquery";
 //choose one of the follow options
@@ -52,7 +52,7 @@ $("someSelector").videoLayers(<VideoLayersOptions>{
     //options
 });
 ```
-Vanilla ES2015
+#### Vanilla ES2015
 ```javascript
 import * as $ from "jquery";
 //choose one of the follow options
@@ -124,8 +124,8 @@ $("someSelector").videoLayers({
 
 ### Layers
 The layers accepts two configurations:
-- [content](): Will be used as raw content performing and append to the layers container
-- [element](): Could be a jQuery valid selector, jQuery object or Element instance.
+- [content](https://davinchi-finsi.github.io/jq-video-layers/interfaces/jqvideolayers.videolayeroptions.html#content): Will be used as raw content performing and append to the layers container
+- [element](https://davinchi-finsi.github.io/jq-video-layers/interfaces/jqvideolayers.videolayeroptions.html#element): Could be a jQuery valid selector, jQuery object or Element instance.
 
 By default, the layers will be appended to the [layersContainerEl](https://davinchi-finsi.github.io/jq-video-layers/classes/jqvideolayers.videolayers.html#layerscontainer), to avoid this behavior specify [appendToLayers](https://davinchi-finsi.github.io/jq-video-layers/interfaces/jqvideolayers.videolayeroptions.html#appendtolayers)
 ```javascript
