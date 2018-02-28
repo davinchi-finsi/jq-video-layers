@@ -1,6 +1,6 @@
 {
   "name": "jq-video-layers",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/jquery.video-layers.js",
   "jsnext:main": "esm2015/jquery.video-layers.js",
