@@ -1,5 +1,5 @@
 # jq-video-layers
-jqVideoLayers is a JQuery widget that allows to add layers like Youtube to any html5 video.
+`jqVideoLayers` is a JQuery widget that allows to add layers like Youtube to any html5 video.
 
 Is extensible using [jQuery UI widget](https://jqueryui.com/widget/)
 
@@ -22,7 +22,7 @@ Is extensible using [jQuery UI widget](https://jqueryui.com/widget/)
 - Possibility to set positions with [jQuery UI Position](http://jqueryui.com/position/)
 - Possibility to use [jQuery UI Show/Hide effects](http://jqueryui.com/show/)
 
-**Note** jqVideoLayers doesn't provide (for now) the posibility to set overlays when the video is in full screen
+**Note** `jqVideoLayers` doesn't provide (for now) the posibility to set overlays when the video is in full screen
 **BUT**, if is used with a Javascript video player like [plyr](https://plyr.io/) is possible. Please see the [example](https://jsfiddle.net/Haztivity/69uftqjn/)
 
 ## Docs
@@ -91,12 +91,14 @@ $("someSelector").videoLayers({
             $("video").videoLayers({
                 layers:[
                     {
+                        //The layer could be simple text, the text will be wrapped in a div element
                         content:"Some text for the layer",
                         position:[25,25],
                         start:1,
                         stop:4
                     },
                     {
+                        //Or could be a valid jQuery selector, jQuery object or Element instance
                         element:"#layer-img",
                         //Use c-video-layers__layer--strip to avoid the default styles of the layer
                         cssClass:"addThisClass andThisOne c-video-layers__layer--strip",
@@ -119,6 +121,29 @@ $("someSelector").videoLayers({
     </body>
 </html>
 ```
+
+### Layers
+The layers accepts two configurations:
+- [content](): Will be used as raw content performing and append to the layers container
+- [element](): Could be a jQuery valid selector, jQuery object or Element instance.
+
+By default, the layers will be appended to the [layersContainerEl](https://davinchi-finsi.github.io/jq-video-layers/classes/jqvideolayers.videolayers.html#layerscontainer), to avoid this behavior specify [appendToLayers](https://davinchi-finsi.github.io/jq-video-layers/interfaces/jqvideolayers.videolayeroptions.html#appendtolayers)
+```javascript
+$("video").videoLayers({
+    layers:[
+        {
+            //The layer could be simple text, the text will be wrapped in a div element
+            element:"#someQuery",
+            position:[25,25],
+            start:1,
+            //Don't append the layer to the layers container
+            appendToLayers:false
+        }
+    ]
+});
+```
+This is useful to handle layers outside the video.
+
 ## jQuery UI
 jQuery UI could be included in the projects in many different ways and with different packages, instead
 of force you to use one, we leave up to you how to include it:
@@ -158,11 +183,8 @@ Please go to [docs](https://davinchi-finsi.github.io/jq-video-layers/interfaces/
 
 For more info, please go to [docs](https://davinchi-finsi.github.io/jq-video-layers/enums/jqvideolayers.videolayersevents.html)
 
-## Fullscreen
-For now jqVideoLayers doesn't support fullscreen itself, the fullscreen compatibility requires a js video player.
-
 ## Usage with other video players
-By default jqVideoLayers wrap the video in a container and uses that container as reference for the layer position.
+By default `jqVideoLayers` wraps the video in a container and uses that container as reference for the layer position.
 
 To use with other video players you must set the option [useParentAsContainer](https://davinchi-finsi.github.io/jq-video-layers/interfaces/jqvideolayers.videolayersoptions.html#useParentAsContainer) to specify which element of the video player must be used as container.
 
@@ -188,7 +210,7 @@ For example, [plyr](https://plyr.io/) generates this structure:
     </div>
 </div>
 ```
-The video wrapper to use for the layers could be `plyr__video-wrapper`, so in the jqVideoPlayers options:
+The video wrapper to use for the layers could be `plyr__video-wrapper`, so in the `jqVideoLayers` options:
 ```javascript
 $("video").videoLayers({
   //set the plyr container as wrapper container
@@ -198,10 +220,13 @@ $("video").videoLayers({
   ]
 });
 ```
-**Please note** that `useParentAsContainer` performs a [JQuery parents](https://api.jquery.com/parents/) search and the query must match with a element parent of the video
+
+With `useParentAsContainer` `jqVideoLayers` will use the container specified as the root element, the [layersContainerEl](https://davinchi-finsi.github.io/jq-video-layers/classes/jqvideolayers.videolayers.html#layerscontainer) will be appended to the specified container
+
+**Please note** that `useParentAsContainer` performs a [JQuery parents](https://api.jquery.com/parents/) search and the query must match with an element parent of the video
 
 ## jQuery UI position
-jQuery UI provides a util to handle positioning. By default, jqVideoLayers doesn't require jQuery UI position, could be used by css styles or using an array in the [position option](https://davinchi-finsi.github.io/jq-video-layers/interfaces/jqvideolayers.videolayeroptions.html#position)
+jQuery UI provides a util to handle positioning. By default, `jqVideoLayers` doesn't require jQuery UI position, could be used by css styles or using an array in the [position option](https://davinchi-finsi.github.io/jq-video-layers/interfaces/jqvideolayers.videolayeroptions.html#position)
 ```javascript
 $("video").videoLayers({
   layers: [
