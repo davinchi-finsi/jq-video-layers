@@ -102,15 +102,7 @@ export class VideoLayers{
             hiddenLayers = this.hiddenLayers,
             addToVisible = [],
             addToHidden = [];
-        for (let hiddenLayerIndex = 0, hiddenLayersLength = hiddenLayers.length; hiddenLayerIndex < hiddenLayersLength; hiddenLayerIndex++) {
-            let currentHiddenLayer = hiddenLayers[hiddenLayerIndex];
-            if(currentTime >= currentHiddenLayer.start && (currentHiddenLayer.stop == undefined || currentTime < currentHiddenLayer.stop)){
-                this._showLayer(currentHiddenLayer);
-                addToVisible.push(hiddenLayers.splice(hiddenLayerIndex,1)[0]);
-                hiddenLayersLength--;
-                hiddenLayerIndex--;
-            }
-        }
+        //hide layers
         for (let visibleLayerIndex = 0, visibleLayersLength = visibleLayers.length; visibleLayerIndex < visibleLayersLength; visibleLayerIndex++) {
             let currentVisibleLayer = visibleLayers[visibleLayerIndex];
             //if the currentTime is after the stop time or is before the start time (rewind)
@@ -121,6 +113,17 @@ export class VideoLayers{
                 visibleLayerIndex--;
             }
         }
+        //show layers
+        for (let hiddenLayerIndex = 0, hiddenLayersLength = hiddenLayers.length; hiddenLayerIndex < hiddenLayersLength; hiddenLayerIndex++) {
+            let currentHiddenLayer = hiddenLayers[hiddenLayerIndex];
+            if(currentTime >= currentHiddenLayer.start && (currentHiddenLayer.stop == undefined || currentTime < currentHiddenLayer.stop)){
+                this._showLayer(currentHiddenLayer);
+                addToVisible.push(hiddenLayers.splice(hiddenLayerIndex,1)[0]);
+                hiddenLayersLength--;
+                hiddenLayerIndex--;
+            }
+        }
+        //update the registry
         this.visibleLayers = visibleLayers.concat(addToVisible);
         this.hiddenLayers = hiddenLayers.concat(addToHidden);
     }

@@ -67,6 +67,8 @@ export interface VideoLayerOptions {
      * To avoid this behavior, set appendToLayers to false
      */
     appendToLayers?:boolean;
+    //Allow any property
+    [key: string]: any;
 }
 
 /**
@@ -135,36 +137,11 @@ export class VideoLayer implements VideoLayerOptions{
      * To avoid this behavior, set appendToLayers to false
      */
     appendToLayers?:boolean;
+    //Allow any property
+    [key: string]: any;
     constructor(params:VideoLayerOptions={}){
-        if(params.element != undefined){
-            this.element = <any>params.element;
-        }
-        if(params.content != undefined){
-            this.content = params.content;
-        }
-        if(params.position != undefined){
-            this.position = params.position;
-        }
-        if(params.cssClass != undefined){
-            this.cssClass = params.cssClass;
-        }
-        if(params.styles != undefined){
-            this.styles = params.styles;
-        }
-        if(params.start != undefined){
-            this.start = params.start;
-        }
-        if(params.stop != undefined){
-            this.stop = params.stop;
-        }
-        if(params.show != undefined){
-            this.show = params.show;
-        }
-        if(params.hide != undefined){
-            this.hide = params.hide;
-        }
-        if(params.appendToLayers != undefined){
-            this.appendToLayers = params.appendToLayers;
+        for(let key in params){
+            this[key] = params[key];
         }
     }
 }

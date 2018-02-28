@@ -15,35 +15,8 @@
 var VideoLayer = /** @class */ (function () {
     function VideoLayer(params) {
         if (params === void 0) { params = {}; }
-        if (params.element != undefined) {
-            this.element = params.element;
-        }
-        if (params.content != undefined) {
-            this.content = params.content;
-        }
-        if (params.position != undefined) {
-            this.position = params.position;
-        }
-        if (params.cssClass != undefined) {
-            this.cssClass = params.cssClass;
-        }
-        if (params.styles != undefined) {
-            this.styles = params.styles;
-        }
-        if (params.start != undefined) {
-            this.start = params.start;
-        }
-        if (params.stop != undefined) {
-            this.stop = params.stop;
-        }
-        if (params.show != undefined) {
-            this.show = params.show;
-        }
-        if (params.hide != undefined) {
-            this.hide = params.hide;
-        }
-        if (params.appendToLayers != undefined) {
-            this.appendToLayers = params.appendToLayers;
+        for (var key in params) {
+            this[key] = params[key];
         }
     }
     return VideoLayer;
@@ -181,15 +154,7 @@ var VideoLayers = /** @class */ (function () {
         //get current progress
         var currentTime = e.target.currentTime;
         var visibleLayers = this.visibleLayers, hiddenLayers = this.hiddenLayers, addToVisible = [], addToHidden = [];
-        for (var hiddenLayerIndex = 0, hiddenLayersLength = hiddenLayers.length; hiddenLayerIndex < hiddenLayersLength; hiddenLayerIndex++) {
-            var currentHiddenLayer = hiddenLayers[hiddenLayerIndex];
-            if (currentTime >= currentHiddenLayer.start && (currentHiddenLayer.stop == undefined || currentTime < currentHiddenLayer.stop)) {
-                this._showLayer(currentHiddenLayer);
-                addToVisible.push(hiddenLayers.splice(hiddenLayerIndex, 1)[0]);
-                hiddenLayersLength--;
-                hiddenLayerIndex--;
-            }
-        }
+        //hide layers
         for (var visibleLayerIndex = 0, visibleLayersLength = visibleLayers.length; visibleLayerIndex < visibleLayersLength; visibleLayerIndex++) {
             var currentVisibleLayer = visibleLayers[visibleLayerIndex];
             //if the currentTime is after the stop time or is before the start time (rewind)
@@ -200,6 +165,17 @@ var VideoLayers = /** @class */ (function () {
                 visibleLayerIndex--;
             }
         }
+        //show layers
+        for (var hiddenLayerIndex = 0, hiddenLayersLength = hiddenLayers.length; hiddenLayerIndex < hiddenLayersLength; hiddenLayerIndex++) {
+            var currentHiddenLayer = hiddenLayers[hiddenLayerIndex];
+            if (currentTime >= currentHiddenLayer.start && (currentHiddenLayer.stop == undefined || currentTime < currentHiddenLayer.stop)) {
+                this._showLayer(currentHiddenLayer);
+                addToVisible.push(hiddenLayers.splice(hiddenLayerIndex, 1)[0]);
+                hiddenLayersLength--;
+                hiddenLayerIndex--;
+            }
+        }
+        //update the registry
         this.visibleLayers = visibleLayers.concat(addToVisible);
         this.hiddenLayers = hiddenLayers.concat(addToHidden);
     };
